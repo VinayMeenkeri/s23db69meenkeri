@@ -9,6 +9,6 @@ Selected India class
 |-------------------|-------| 
 | state_name        | String|
 | state_population  | number|
-| state language    | string|
+| state_language    | string|
 
 

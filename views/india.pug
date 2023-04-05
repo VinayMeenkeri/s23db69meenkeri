@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  -
+   let results =[
+      {
+        "state_name": "Karnataka",
+        "state_population": 60000000,
+        "state_language": "Kannada" 
+      },
+      {
+        "state_name": "Andhra Pradesh",
+        "state_population": 50000000,
+        "state_language": "Telugu" 
+      },
+      {
+        "state_name": "Maharashtra",
+        "state_population": 70000000,
+        "state_language": "Marathi" 
+      },
+      {
+        "state_name": "Tamil Nadu",
+        "state_population": 35000000,
+        "state_language": "Tamil" 
+      },
+      {
+        "state_name": "Kerala",
+        "state_population": 30000000,
+        "state_language": "Malayalam" 
+      }
+    ]
+  h1= title
+  .container-fluid 
+    .row 
+    
+      each insect in results
+        div(class="col-sm-2" style=`border:solid 1px black` onclick=`buy(${results.indexOf(insect)})`) 
+          each value,key in insect 
+            = key + " : " + value
+            br
+  
