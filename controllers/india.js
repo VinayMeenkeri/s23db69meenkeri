@@ -3,9 +3,16 @@ var india = require('../models/india');
 exports.india_list = function(req, res) {
 res.send('NOT IMPLEMENTED: india list');
 };
-// for a specific india.
-exports.india_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: india detail: ' + req.params.id);
+// for a specific india. 
+exports.india_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await india.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
 // Handle india create on POST.
 exports.india_create_post = function(req, res) {
@@ -15,9 +22,25 @@ res.send('NOT IMPLEMENTED: india create POST');
 exports.india_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: india delete DELETE ' + req.params.id);
 };
-// Handle india update form on PUT.
-exports.india_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: india update PUT' + req.params.id);
+// Handle India update form on PUT.
+exports.india_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await india.findById( req.params.id)
+ // Do updates of properties
+ if(req.body.state_name)
+ toUpdate.state_name = req.body.state_name;
+ if(req.body.state_population) toUpdate.state_population = req.body.state_population;
+ if(req.body.state_language) toUpdate.state_language = req.body.state_language;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+ }
 };
 
 // List of all india
