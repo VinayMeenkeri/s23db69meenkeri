@@ -31,3 +31,16 @@ exports.india_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+    // VIEWS
+// Handle a show all view
+exports.india_view_all_Page = async function(req, res) {
+    try{
+        theIndia = await india.find();
+    res.render('india', { title: 'india Search Results', results: theIndia });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };

@@ -1,46 +1,19 @@
 extends layout
 
 block content
-  -
-   let results =[
-      {
-        "state_name": "Karnataka",
-        "state_population": 60000000,
-        "state_language": "Kannada" 
-      },
-      {
-        "state_name": "Andhra Pradesh",
-        "state_population": 50000000,
-        "state_language": "Telugu" 
-      },
-      {
-        "state_name": "Maharashtra",
-        "state_population": 70000000,
-        "state_language": "Marathi" 
-      },
-      {
-        "state_name": "Tamil Nadu",
-        "state_population": 35000000,
-        "state_language": "Tamil" 
-      },
-      {
-        "state_name": "Kerala",
-        "state_population": 30000000,
-        "state_language": "Malayalam" 
-      }
-    ]
+  - let items = results
   h1= title
   .container-fluid 
     .row 
-    
-      each india  in results
-        div(class="col-sm-2" style=`border:solid 1px black` onclick=`buy(${results.indexOf(india)})`) 
-          each value,key in india  
-            = key + " : " + value
-            br
+      each cin in items
+        div(class="col-sm-2" style=`border:solid 1px brown` onclick=`buy(${items.indexOf(cin)})`) 
+          p.
+           state_name -  #{cin.state_name}
+          p.
+           state_population -  #{cin.state_population}
+          p.
+           state_language  -  #{cin.state_language}
   script.
     function buy(index){
       alert("You purchased item "+index)
     }
-
-  

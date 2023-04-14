@@ -1,9 +1,7 @@
 var express = require('express');
+const india_controlers= require('../controllers/india');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('india', { title: 'Search Results india' });
-});
-
+/* GET india */
+router.get('/', india_controlers.india_view_all_Page);
 module.exports = router;
