@@ -18,10 +18,18 @@ exports.india_detail = async function (req, res) {
 exports.india_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: india create POST');
 };
-// Handle india delete form on DELETE.
-exports.india_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: india delete DELETE ' + req.params.id);
-};
+// Handle India delete on DELETE.
+exports.india_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await india.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
 // Handle India update form on PUT.
 exports.india_update_put = async function(req, res) {
  console.log(`update on id ${req.params.id} with body
@@ -88,3 +96,58 @@ exports.india_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+    // Handle a show one view with id specified by query
+exports.india_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await india.findById( req.query.id)
+    res.render('indiadetail',
+   { title: 'india Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle building the view for creating a india.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.india_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('indiacreate', { title: 'india Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle building the view for updating a india.
+// query provides the id
+exports.india_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await india.findById(req.query.id)
+    res.render('indiaupdate', { title: 'india Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+   // Handle a delete one view with id from query
+exports.india_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await india.findById(req.query.id)
+    res.render('indiadelete', { title: 'India Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
