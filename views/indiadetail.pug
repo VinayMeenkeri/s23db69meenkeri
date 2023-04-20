@@ -1,20 +1,23 @@
 extends layout
 block content
- h1= title
- - let stateid = toShow._id
- - let state_name = toShow.state_name
- - let state_population = toShow.state_population
- - let state_language = toShow.state_language
- div
- div.row
- div(class='indiaAttr mr-3') India ID is:
- div #{stateid}
- div.row
- div(class='indiaAttr mr-3') India state name is:
- div #{state_name}
- div.row
- div(class='indiaAttr mr-3') India state population is:
- div #{state_population}
- div.row
- div(class='indiaAttr mr-3') India state language is:
- div #{state_language}
+    h1= title
+    if (toShow == null) 
+      h2 No instance to detail 
+    else
+    - let stateid = toShow._id
+    - let state_name = toShow.state_name
+    - let state_population = toShow.state_population
+    - let state_language = toShow.state_language
+    div
+    div.row
+    div(class='indiaAttr mr-3') India ID is:
+    div #{stateid}
+    div.row
+    div(class='indiaAttr mr-3') India state name is:
+    div #{state_name}
+    div.row
+    div(class='indiaAttr mr-3') India state population is:
+    div #{state_population}
+    div.row
+    div(class='indiaAttr mr-3') India state language is:
+    div #{state_language}

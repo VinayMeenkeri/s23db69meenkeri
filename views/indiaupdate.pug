@@ -2,8 +2,9 @@ extends layout
 
 block content 
     h1= title 
-
-
+    if (toShow == null) 
+      h2 No instance to detail 
+    else
     - let indiaid = toShow._id 
     - let state_name = toShow.state_name 
     - let state_population  = toShow.state_population 
