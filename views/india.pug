@@ -1,19 +1,16 @@
 extends layout
 
 block content
-  - let items = results
+  - let country = results
   h1= title
-  .container-fluid 
-    .row 
-      each cin in items
-        div(class="col-sm-2" style=`background-color:black;color: yellow;font-family: "papyrus";border: 5px solid green;border-radius: 18px; padding: 12px; border-inline-style: solid; box-shadow: 8px 9px 8px rgba(0, 0, 0, 0.5)` onclick=`buy(${items.indexOf(cin)})`) 
-          p.
-           state_name -  #{cin.state_name}
-          p.
-           state_population -  #{cin.state_population}
-          p.
-           state_language  -  #{cin.state_language}
+  div(class="container-fluid")
+  div(class="row m-1")
+    each india in country
+      - let destination = `dispatch(\"/india/update?id=${india._id}\")`
+      div(class="row-sm-2", class="m-1") India #{india.state_name}(#{india.state_population}) is #{india.state_language                                 } 
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+
   script.
-    function buy(index){
-      alert("You purchased item "+index)
+    function dispatch(path){
+      window.location.href=path
     }
