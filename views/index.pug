@@ -1,19 +1,12 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
-  p Connecting the server to render
-  button(type="button", onclick="doReduce()" class="btn btn-secondary") Press Me
-  #reduce Reduce the value
-
-  a(href="/india") india
-  script.
-    var count = 20
-    var change = -1
-    function doReduce(){
-      count = count + change
-      change = change -1
-      let resultdiv = document.getElementById('reduce')
-      resultdiv.innerHTML=`Count ${count} with change ${change}`
-    }
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/india") Take me to india 
+    br 
+    a(href="/logout") Logout 
