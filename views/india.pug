@@ -3,12 +3,18 @@ extends layout
 block content
   - let country = results
   h1= title
+  - let create = `dispatch(\"/india/create\")`
+  button.btn( class="btn-success", onclick= create) Create new State
   div(class="container-fluid")
   div(class="row m-1")
     each india in country
       - let destination = `dispatch(\"/india/update?id=${india._id}\")`
-      div(class="row-sm-2", class="m-1") India #{india.state_name}(#{india.state_population}) is #{india.state_language                                 } 
+      - let detail = `dispatch(\"/india/detail/?id=${india._id}")`
+      - let deleteindia = `dispatch(\"/india/delete/?id=${india ._id}")` 
+      div(class="row-sm-2" class="m-1") India #{india.state_name}(#{india.state_population}) is #{india.state_language                                 } 
         button.btn( class="btn-primary ml-1", onclick= destination) Update
+        button.btn( class="btn-warning", onclick= detail) Details
+        button.btn( class="btn-danger", onclick= deleteindia) Delete
 
   script.
     function dispatch(path){
