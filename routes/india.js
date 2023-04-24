@@ -15,11 +15,11 @@ const secured = (req, res, next) => {
 /* GET india */
 router.get('/', india_controlers.india_view_all_Page);
 /* GET detail india page */
-router.get('/detail', india_controlers.india_view_one_Page);
+router.get('/detail', secured, india_controlers.india_view_one_Page);
 /* GET create india page */
-router.get('/create', india_controlers.india_create_Page);
+router.get('/create', secured, india_controlers.india_create_Page);
 /* GET create update page */
 router.get('/update', secured, india_controlers.india_update_Page);
 /* GET delete india page */
-router.get('/delete', india_controlers.india_delete_Page);
+router.get('/delete', secured, india_controlers.india_delete_Page);
 module.exports = router;
